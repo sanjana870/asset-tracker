@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const employeeSchema = new mongoose.Schema({
   employeeId: { type: String, required: true, unique: true },
@@ -10,4 +10,4 @@ const employeeSchema = new mongoose.Schema({
   costCenterId: String
 });
 
-module.exports = mongoose.model('Employee', employeeSchema);
+export default mongoose.model('Employee', employeeSchema);

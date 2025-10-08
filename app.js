@@ -1,8 +1,21 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-require('dotenv').config();
-require('./config/db')(); // Connect to MongoDB
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+
+// Import routes
+import authRoutes from './routes/authRoutes.js';
+import assetRoutes from './routes/assetRoutes.js';
+import requestRoutes from './routes/requestRoutes.js';
+import employeeRoutes from './routes/employeeRoutes.js';
+import reportRoutes from './routes/reportRoutes.js';
+
+// Configure dotenv
+dotenv.config();
+
+// Connect to MongoDB
+connectDB();
 
 const app = express();
 
@@ -12,15 +25,15 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/assets', require('./routes/assetRoutes'));
-app.use('/api/requests', require('./routes/requestRoutes'));
-app.use('/api/employees', require('./routes/employeeRoutes'));
-app.use('/api/reports', require('./routes/reportRoutes'));
+app.use('/api/auth', authRoutes);
+app.use('/api/assets', assetRoutes);
+app.use('/api/requests', requestRoutes);
+app.use('/api/employees', employeeRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Error handling fallback
 app.use((req, res) => {
   res.status(404).json({ success: false, error: { code: 'NOT_FOUND', message: 'Endpoint not found' } });
 });
 
-module.exports = app;
+export default app;

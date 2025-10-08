@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import reportController from '../Controllers/reportControllers.js';
+import { authenticate, authorize } from '../middlewares/Auth.middleware.js';
+import multer from 'multer';
+
 const router = express.Router();
-const reportController = require('../controllers/reportController');
-const { authenticate, authorize } = require('../middleware/auth');
-const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 router.post('/assets/bulk-upload', authenticate, authorize(['manager']), upload.single('file'), reportController.bulkUpload);
 router.get('/assets', authenticate, reportController.generateReport);
 
-module.exports = router;
+export default router;

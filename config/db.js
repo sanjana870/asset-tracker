@@ -1,9 +1,19 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-module.exports = () => {
-  mongoose.connect(process.env.MONGO_URI, {
+const connectDB = () => {
+  const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/asset-management';
+  
+  mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  }).then(() => console.log('📦 MongoDB connected'))
-    .catch(err => console.error('❌ MongoDB error:', err));
+  })
+  .then(() => {
+    console.log('📦 MongoDB connected successfully');
+  })
+  .catch((err) => {
+    console.error('❌ MongoDB connection error:', err.message);
+    process.exit(1);
+  });
 };
+
+export default connectDB;

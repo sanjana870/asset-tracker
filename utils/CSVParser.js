@@ -1,7 +1,7 @@
-const fs = require('fs');
-const csv = require('csv-parser');
+import fs from 'fs';
+import csv from 'csv-parser';
 
-module.exports = async (filePath, costCenterId) => {
+const csvParser = async (filePath, costCenterId) => {
   const parsed = [];
   const errors = [];
 
@@ -24,3 +24,5 @@ module.exports = async (filePath, costCenterId) => {
       .on('end', () => resolve({ parsed, errors }));
   });
 };
+
+export default csvParser;

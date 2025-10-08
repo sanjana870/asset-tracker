@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const transferRequestSchema = new mongoose.Schema({
   employeeId: String,
@@ -15,4 +15,4 @@ const transferRequestSchema = new mongoose.Schema({
   rejectionReason: String
 });
 
-module.exports = mongoose.model('TransferRequest', transferRequestSchema);
+export default mongoose.model('TransferRequest', transferRequestSchema);

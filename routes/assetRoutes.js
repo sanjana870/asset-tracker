@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import assetController from '../Controllers/assetControllers.js';
+import { authenticate, authorize } from '../middlewares/Auth.middleware.js';
+
 const router = express.Router();
-const assetController = require('../controllers/assetController');
-const { authenticate, authorize } = require('../middleware/auth');
 
 router.get('/', authenticate, assetController.getAssets);
 router.post('/', authenticate, authorize(['admin', 'manager']), assetController.addAsset);
@@ -10,4 +11,4 @@ router.put('/:serial/reissue', authenticate, authorize(['admin']), assetControll
 router.delete('/:serial', authenticate, authorize(['admin']), assetController.deleteAsset);
 router.get('/history', authenticate, authorize(['admin']), assetController.getDeletedAssets);
 
-module.exports = router;
+export default router;

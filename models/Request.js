@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const requestSchema = new mongoose.Schema({
   assetSerial: { type: String, required: true },
@@ -17,4 +17,4 @@ const requestSchema = new mongoose.Schema({
   rejectionReason: String
 });
 
-module.exports = mongoose.model('Request', requestSchema);
+export default mongoose.model('Request', requestSchema);

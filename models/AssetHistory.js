@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const assetHistorySchema = new mongoose.Schema({
   serial: String,
@@ -10,4 +10,4 @@ const assetHistorySchema = new mongoose.Schema({
   deletedBy: String
 });
 
-module.exports = mongoose.model('AssetHistory', assetHistorySchema);
+export default mongoose.model('AssetHistory', assetHistorySchema);

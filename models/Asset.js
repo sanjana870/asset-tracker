@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const assetSchema = new mongoose.Schema({
   serial: { type: String, required: true, unique: true },
@@ -18,5 +18,5 @@ const assetSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Asset', assetSchema);
+export default mongoose.model('Asset', assetSchema);
 
